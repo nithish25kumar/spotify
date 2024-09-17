@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:spotify2/common/helpers/is_dark_mode.dart';
+import 'package:spotify2/common/widgets/appbar/app_bar.dart';
 import 'package:spotify2/common/widgets/buttons/basic_app_button.dart';
 import 'package:spotify2/core/theme/app_colors.dart';
 
@@ -14,6 +15,7 @@ class SignupOrSignin extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
+          const BasicAppbar(),
           Align(
             alignment: Alignment.topRight,
             child: SvgPicture.asset('assets/vectors/top_pattern.svg'),
@@ -40,9 +42,7 @@ class SignupOrSignin extends StatelessWidget {
                     const Text(
                       'Enjoy listening to Music ',
                       style: const TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20),
+                          fontWeight: FontWeight.bold, fontSize: 20),
                     ),
                     const SizedBox(
                       height: 21,
