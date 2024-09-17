@@ -1,10 +1,11 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:spotify2/core/configs/assets/app_vectors.dart';
 import 'package:spotify2/core/theme/app_colors.dart';
-
+import 'package:spotify2/presentation/choose_mode/bloc/theme_cubit.dart';
 import '../../../common/widgets/buttons/basic_app_button.dart';
 
 class ChooseModePage extends StatelessWidget {
@@ -47,23 +48,31 @@ class ChooseModePage extends StatelessWidget {
                   children: [
                     Column(
                       children: [
-                        ClipOval(
-                          child: BackdropFilter(
-                            filter: ImageFilter.blur(sigmaX: 1),
-                            child: Container(
-                              height: 80,
-                              width: 80,
-                              decoration: BoxDecoration(
-                                  color: Color(0xff30393C).withOpacity(0.5),
-                                  shape: BoxShape.circle),
-                              child: SvgPicture.asset(
-                                'assets/vectors/moon.svg',
-                                fit: BoxFit.none,
+                        GestureDetector(
+                          onTap: () {
+                            context
+                                .read<ThemeCubit>()
+                                .updateTheme(ThemeMode.dark);
+                          },
+                          child: ClipOval(
+                            child: BackdropFilter(
+                              filter: ImageFilter.blur(sigmaX: 1),
+                              child: Container(
+                                height: 80,
+                                width: 80,
+                                decoration: BoxDecoration(
+                                    color: const Color(0xff30393C)
+                                        .withOpacity(0.5),
+                                    shape: BoxShape.circle),
+                                child: SvgPicture.asset(
+                                  'assets/vectors/moon.svg',
+                                  fit: BoxFit.none,
+                                ),
                               ),
                             ),
                           ),
                         ),
-                        SizedBox(height: 15),
+                        const SizedBox(height: 15),
                         Text(
                           'Dark Mode',
                           style: TextStyle(
@@ -73,26 +82,35 @@ class ChooseModePage extends StatelessWidget {
                         )
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 40,
                     ),
                     Column(
                       children: [
-                        ClipOval(
-                          child: BackdropFilter(
-                            filter: ImageFilter.blur(sigmaX: 1),
-                            child: Container(
-                              height: 80,
-                              width: 80,
-                              decoration: BoxDecoration(
-                                  color: Color(0xff30393C).withOpacity(0.5),
-                                  shape: BoxShape.circle),
-                              child: SvgPicture.asset('assets/vectors/sun.svg',
-                                  fit: BoxFit.none),
+                        GestureDetector(
+                          onTap: () {
+                            context
+                                .read<ThemeCubit>()
+                                .updateTheme(ThemeMode.light);
+                          },
+                          child: ClipOval(
+                            child: BackdropFilter(
+                              filter: ImageFilter.blur(sigmaX: 1),
+                              child: Container(
+                                height: 80,
+                                width: 80,
+                                decoration: BoxDecoration(
+                                    color: const Color(0xff30393C)
+                                        .withOpacity(0.5),
+                                    shape: BoxShape.circle),
+                                child: SvgPicture.asset(
+                                    'assets/vectors/sun.svg',
+                                    fit: BoxFit.none),
+                              ),
                             ),
                           ),
                         ),
-                        SizedBox(height: 15),
+                        const SizedBox(height: 15),
                         Text(
                           'Light Mode',
                           style: TextStyle(
@@ -104,19 +122,16 @@ class ChooseModePage extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 50,
                 ),
                 BasicAppButton(
                   onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (BuildContext context) =>
-                                const ChooseModePage()));
+                    // Navigate to another page or pop
+                    Navigator.pop(context);
                   },
                   title: 'Continue',
-                  height: null,
+                  height: 50, // Ensure a valid height is provided
                 )
               ],
             ),
