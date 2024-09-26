@@ -16,14 +16,15 @@ class NewsSongs extends StatelessWidget {
           height: 200,
           child: BlocBuilder<NewsSongsCubit, NewsSongsState>(
             builder: (context, state) {
-              if (state is NewSongsLoading) {
-                return Container(
-                    alignment: Alignment.center,
-                    child: const CircularProgressIndicator());
-              }
               if (state is NewsSongsLoaded) {
                 return _songs(state.songs);
               }
+              if (state is NewsSongsLoading) {
+                return Container(
+                    alignment: Alignment.center,
+                    child: CircularProgressIndicator());
+              }
+
               return Container();
             },
           )),
