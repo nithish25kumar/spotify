@@ -16,7 +16,7 @@ class NewsSongs extends StatelessWidget {
           height: 200,
           child: BlocBuilder<NewsSongsCubit, NewsSongsState>(
             builder: (context, state) {
-              if (state is NewsSongsLoading) {
+              if (state is NewSongsLoading) {
                 return Container(
                     alignment: Alignment.center,
                     child: const CircularProgressIndicator());
@@ -33,13 +33,12 @@ class NewsSongs extends StatelessWidget {
   Widget _songs(List<SongEntity> songs) {
     return ListView.separated(
         scrollDirection: Axis.horizontal,
-        shrinkWrap: true,
         itemBuilder: (context, index) {
-          return Column(
+          return const Column(
             children: [],
           );
         },
-        separatorBuilder: (context, index) => SizedBox(
+        separatorBuilder: (context, index) => const SizedBox(
               width: 14,
             ),
         itemCount: songs.length);
