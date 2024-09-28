@@ -20,7 +20,7 @@ class SongModel {
   }
 }
 
-extension SongMode1X on SongModel {
+extension SongModelX on SongModel {
   SongEntity toEntity() {
     return SongEntity(
         title: title!,

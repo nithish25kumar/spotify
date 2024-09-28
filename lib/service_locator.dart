@@ -10,10 +10,17 @@ import 'package:spotify2/domain/usecases/song/get_news_songs.dart';
 import 'data/repositary/song/song_repositary_impl.dart';
 import 'domain/repositary/song/song.dart';
 
-final sl = GetIt.instance;
+final GetIt sl = GetIt.instance;
+
+void setup() {
+  sl.registerLazySingleton<SongRepositaryImpl>(() => SongRepositaryImpl());
+}
+
+final repository = sl<SongRepositaryImpl>();
 Future<void> initializeDependencies() async {
-  sl.registerSingleton<SongFirebaseService>(SongFirebaseServiceImpl());
   sl.registerSingleton<AuthFirebaseService>(AuthFirebaseServiceImpl());
+  sl.registerSingleton<SongFirebaseService>(SongFirebaseServiceImpl());
+
   sl.registerSingleton<AuthRepositary>(AuthRepositaryImpl());
 
   sl.registerSingleton<SongsRepositary>(SongRepositaryImpl());
