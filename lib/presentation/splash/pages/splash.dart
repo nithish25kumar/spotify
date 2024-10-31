@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:spotify2/presentation/intro/pages/get_started.dart';
+
+import '../../../core/configs/assets/app_vectors.dart';
+import '../../intro/pages/get_started.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -19,7 +21,7 @@ class _SplashPageState extends State<SplashPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(child: SvgPicture.asset('assets/vectors/spotify_logo.svg')),
+      body: Center(child: SvgPicture.asset(AppVectors.logo)),
     );
   }
 

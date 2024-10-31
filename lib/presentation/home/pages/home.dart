@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:spotify2/common/helpers/is_dark_mode.dart';
-import 'package:spotify2/core/theme/app_colors.dart';
-import 'package:spotify2/presentation/home/widgets/news_songs.dart';
 
 import '../../../common/widgets/appbar/app_bar.dart';
+import '../../../core/configs/assets/app_images.dart';
+import '../../../core/configs/assets/app_vectors.dart';
+import '../../../core/configs/theme/app_colors.dart';
+import '../../profile/pages/profile.dart';
+import '../widgets/news_songs.dart';
+import '../widgets/play_list.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -16,6 +20,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
+
   @override
   void initState() {
     super.initState();
@@ -27,43 +32,62 @@ class _HomePageState extends State<HomePage>
     return Scaffold(
       appBar: BasicAppbar(
         hideBack: true,
-        title: SvgPicture.asset('assets/vectors/spotify_logo.svg',
-            height: 40, width: 40),
+        action: IconButton(
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (BuildContext context) => const ProfilePage()));
+            },
+            icon: const Icon(Icons.person)),
+        title: SvgPicture.asset(
+          AppVectors.logo,
+          height: 40,
+          width: 40,
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            _homeArtistCard(),
+            _homeTopCard(),
             _tabs(),
             SizedBox(
               height: 260,
               child: TabBarView(
                 controller: _tabController,
-                children: [NewsSongs(), Container(), Container(), Container()],
+                children: [
+                  const NewsSongs(),
+                  Container(),
+                  Container(),
+                  Container()
+                ],
               ),
-            )
+            ),
+            const PlayList()
           ],
         ),
       ),
     );
   }
 
-  Widget _homeArtistCard() {
+  Widget _homeTopCard() {
     return Center(
       child: SizedBox(
         height: 140,
         child: Stack(
           children: [
             Align(
-                alignment: Alignment.bottomCenter,
-                child: SvgPicture.asset('assets/vectors/home_top_card.svg')),
+              alignment: Alignment.bottomCenter,
+              child: SvgPicture.asset(AppVectors.homeTopCard),
+            ),
             Align(
-                alignment: Alignment.bottomRight,
-                child: Padding(
-                  padding: const EdgeInsets.only(right: 60),
-                  child: Image.asset('assets/images/home_artist.png'),
-                ))
+              alignment: Alignment.bottomRight,
+              child: Padding(
+                padding: const EdgeInsets.only(right: 60),
+                child: Image.asset(AppImages.homeArtist),
+              ),
+            )
           ],
         ),
       ),
@@ -91,9 +115,9 @@ class _HomePageState extends State<HomePage>
           style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
         ),
         Text(
-          'Podcast',
+          'Podcasts',
           style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
-        ),
+        )
       ],
     );
   }
