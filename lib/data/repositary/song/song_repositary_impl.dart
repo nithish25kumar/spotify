@@ -9,4 +9,9 @@ class SongRepositaryImpl extends SongsRepositary {
   Future<Either> getNewsSongs() async {
     return await sl<SongFirebaseService>().getNewsSongs();
   }
+
+  @override
+  Future<Either> getPlayList() async {
+    return await sl<SongFirebaseService>().getPlaylist();
+  }
 }

@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:spotify2/common/helpers/is_dark_mode.dart';
-
-import '../../../core/configs/constants/app_urls.dart';
-import '../../../core/configs/theme/app_colors.dart';
+import 'package:spotify2/core/configs/constants/app_urls.dart';
+import 'package:spotify2/presentation/home/bloc/news_songs_cubit.dart';
+import '../../../core/theme/app_colors.dart';
 import '../../../domain/entities/song/song.dart';
-import '../../song_player/pages/song_player.dart';
-import '../bloc/news_songs_cubit.dart';
-import '../bloc/news_songs_state.dart';
+import '../bloc/news_song_state.dart';
 
 class NewsSongs extends StatelessWidget {
   const NewsSongs({super.key});
@@ -42,14 +40,7 @@ class NewsSongs extends StatelessWidget {
         shrinkWrap: true,
         itemBuilder: (context, index) {
           return GestureDetector(
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (BuildContext context) => SongPlayerPage(
-                            songEntity: songs[index],
-                          )));
-            },
+            onTap: () {},
             child: SizedBox(
               width: 160,
               child: Column(
@@ -62,7 +53,7 @@ class NewsSongs extends StatelessWidget {
                           image: DecorationImage(
                               fit: BoxFit.cover,
                               image: NetworkImage(
-                                  '${AppURLs.coverFirestorage}${songs[index].artist} - ${songs[index].title}.jpg?${AppURLs.mediaAlt}'))),
+                                  '${AppUrls.firestorage}${songs[index].artist} - ${songs[index].title}.jpg?${AppUrls.mediaAlt}'))),
                       child: Align(
                         alignment: Alignment.bottomRight,
                         child: Container(

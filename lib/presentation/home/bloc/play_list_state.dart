@@ -6,6 +6,7 @@ class PlayListLoading extends PlayListState {}
 
 class PlayListLoaded extends PlayListState {
   final List<SongEntity> songs;
+
   PlayListLoaded({required this.songs});
 }
 

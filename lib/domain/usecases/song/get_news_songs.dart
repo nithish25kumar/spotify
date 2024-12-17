@@ -1,12 +1,11 @@
 import 'package:dartz/dartz.dart';
+import 'package:spotify2/core/usercase/usecase.dart';
+import 'package:spotify2/data/repositary/song/song_repositary_impl.dart';
+import 'package:spotify2/service_locator.dart';
 
-import '../../../core/usecase/usecase.dart';
-import '../../../service_locator.dart';
-import '../../repository/song/song.dart';
-
-class GetNewsSongsUseCase implements UseCase<Either, dynamic> {
+class GetNewsSongsUseCase implements useCase<Either, dynamic> {
   @override
   Future<Either> call({params}) async {
-    return await sl<SongsRepository>().getNewsSongs();
+    return await sl<SongRepositaryImpl>().getNewsSongs();
   }
 }

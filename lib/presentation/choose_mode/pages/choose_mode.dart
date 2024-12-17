@@ -3,13 +3,11 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
-import '../../../common/widgets/button/basic_app_button.dart';
-import '../../../core/configs/assets/app_images.dart';
-import '../../../core/configs/assets/app_vectors.dart';
-import '../../../core/configs/theme/app_colors.dart';
-import '../../auth/pages/signup_or_siginin.dart';
-import '../bloc/theme_cubit.dart';
+import 'package:spotify2/core/configs/assets/app_vectors.dart';
+import 'package:spotify2/core/theme/app_colors.dart';
+import 'package:spotify2/presentation/auth/pages/signup_or_signin.dart';
+import 'package:spotify2/presentation/choose_mode/bloc/theme_cubit.dart';
+import '../../../common/widgets/buttons/basic_app_button.dart';
 
 class ChooseModePage extends StatelessWidget {
   const ChooseModePage({super.key});
@@ -17,17 +15,13 @@ class ChooseModePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.lightBackground,
       body: Stack(
         children: [
           Container(
-            padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 40),
             decoration: const BoxDecoration(
                 image: DecorationImage(
                     fit: BoxFit.fill,
-                    image: AssetImage(
-                      AppImages.chooseModeBG,
-                    ))),
+                    image: AssetImage('assets/images/choose_mode_bg.png'))),
           ),
           Container(
             color: Colors.black.withOpacity(0.15),
@@ -37,9 +31,8 @@ class ChooseModePage extends StatelessWidget {
             child: Column(
               children: [
                 Align(
-                  alignment: Alignment.topCenter,
-                  child: SvgPicture.asset(AppVectors.logo),
-                ),
+                    alignment: Alignment.topCenter,
+                    child: SvgPicture.asset('assets/vectors/spotify_logo.svg')),
                 const Spacer(),
                 const Text(
                   'Choose Mode',
@@ -64,7 +57,7 @@ class ChooseModePage extends StatelessWidget {
                           },
                           child: ClipOval(
                             child: BackdropFilter(
-                              filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                              filter: ImageFilter.blur(sigmaX: 1),
                               child: Container(
                                 height: 80,
                                 width: 80,
@@ -73,17 +66,15 @@ class ChooseModePage extends StatelessWidget {
                                         .withOpacity(0.5),
                                     shape: BoxShape.circle),
                                 child: SvgPicture.asset(
-                                  AppVectors.moon,
+                                  'assets/vectors/moon.svg',
                                   fit: BoxFit.none,
                                 ),
                               ),
                             ),
                           ),
                         ),
-                        const SizedBox(
-                          height: 15,
-                        ),
-                        const Text(
+                        const SizedBox(height: 15),
+                        Text(
                           'Dark Mode',
                           style: TextStyle(
                               fontWeight: FontWeight.w500,
@@ -105,7 +96,7 @@ class ChooseModePage extends StatelessWidget {
                           },
                           child: ClipOval(
                             child: BackdropFilter(
-                              filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                              filter: ImageFilter.blur(sigmaX: 1),
                               child: Container(
                                 height: 80,
                                 width: 80,
@@ -114,17 +105,14 @@ class ChooseModePage extends StatelessWidget {
                                         .withOpacity(0.5),
                                     shape: BoxShape.circle),
                                 child: SvgPicture.asset(
-                                  AppVectors.sun,
-                                  fit: BoxFit.none,
-                                ),
+                                    'assets/vectors/sun.svg',
+                                    fit: BoxFit.none),
                               ),
                             ),
                           ),
                         ),
-                        const SizedBox(
-                          height: 15,
-                        ),
-                        const Text(
+                        const SizedBox(height: 15),
+                        Text(
                           'Light Mode',
                           style: TextStyle(
                               fontWeight: FontWeight.w500,
@@ -139,14 +127,17 @@ class ChooseModePage extends StatelessWidget {
                   height: 50,
                 ),
                 BasicAppButton(
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (BuildContext context) =>
-                                  const SignupOrSigninPage()));
-                    },
-                    title: 'Continue')
+                  onPressed: () {
+                    // Navigate to another page or pop
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (BuildContext context) =>
+                                const SignupOrSignin()));
+                  },
+                  title: 'Continue',
+                  height: 50, // Ensure a valid height is provided
+                )
               ],
             ),
           ),
