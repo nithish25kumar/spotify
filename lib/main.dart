@@ -1,27 +1,20 @@
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hydrated_bloc/hydrated_bloc.dart';
-import 'package:path_provider/path_provider.dart';
-
-import 'package:spotify2/presentation/choose_mode/bloc/theme_cubit.dart';
-import 'package:spotify2/presentation/splash/pages/splash.dart';
-
-import 'core/configs/theme/app_theme.dart';
+import 'package:shoppingapp/Admin/add_product.dart';
+import 'package:shoppingapp/Admin/admin_login.dart';
+import 'package:shoppingapp/pages/bottomnav.dart';
+import 'package:shoppingapp/pages/home.dart';
+import 'package:shoppingapp/pages/login.dart';
+import 'package:shoppingapp/pages/signup.dart';
 import 'firebase_options.dart';
-import 'service_locator.dart';
 
-Future<void> main() async {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  HydratedBloc.storage = await HydratedStorage.build(
-    storageDirectory: kIsWeb
-        ? HydratedStorage.webStorageDirectory
-        : await getApplicationDocumentsDirectory(),
-  );
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
-  await initializeDependencies();
+  // Initialize Firebase with platform-specific options
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 
   runApp(const MyApp());
 }
@@ -31,16 +24,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [BlocProvider(create: (_) => ThemeCubit())],
-      child: BlocBuilder<ThemeCubit, ThemeMode>(
-        builder: (context, mode) => MaterialApp(
-            theme: AppTheme.lightTheme,
-            darkTheme: AppTheme.darkTheme,
-            themeMode: mode,
-            debugShowCheckedModeBanner: false,
-            home: const SplashPage()),
+    return MaterialApp(
+      title: 'Shoppingwebsite',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
       ),
+      home: AddProduct(),
     );
   }
 }
